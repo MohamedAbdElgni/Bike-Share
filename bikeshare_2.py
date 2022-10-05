@@ -1,3 +1,5 @@
+import pyfiglet as pfg
+from termcolor import colored as tc
 import calendar as cal
 import time as T
 import numpy as np
@@ -13,7 +15,7 @@ d_month = cal.month_name[1:]+['All']
 d_day = cal.day_name[:]+['All']
 
 CITY_DATA = {'chicago': 'chicago.csv',
-             'new york city': 'new_york_city.csv', 'washington': 'washington.csv'}
+             'newyork': 'new_york_city.csv', 'washington': 'washington.csv'}
 
 
 def get_filters():
@@ -41,6 +43,7 @@ def get_filters():
         if month not in d_month:
             print("invalid input for months".title())
         else:
+
             break
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
@@ -50,6 +53,9 @@ def get_filters():
         if day not in d_day:
             print("invalid input for days".title())
         else:
+            res = tc(pfg.figlet_format(
+                "Loading Stats!", font="digital"), color='cyan')
+            print(res)
             break
 
     print('-'*40)
@@ -124,14 +130,16 @@ def station_stats(df):
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
-    print('\nCalculating Trip Duration...\n')
+    print('\nCalculating Trip Duration...\n'.title())
     start_time = T.time()
 
     # display total travel time
-
+    print(
+        f"total travel time for this city is ==> {round((df['Trip Duration'].sum())/3600,2)} hours".title())
     # display mean travel time
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print(
+        f"the average travel time is ==> {round((df['Trip Duration'].mean()/60),2)} minutes ".title())
+    print(f"\nThis took {T.time() - start_time} seconds.".title())
     print('-'*40)
 
 
@@ -147,12 +155,12 @@ def user_stats(df):
     for x, y in (df['User Type'].value_counts().to_dict()).items():
         print(f"a {y} of {x}s".title())
     # Display counts of gender
-    # # Display earliest, most recent, and most common year of birth
+    # Display earliest, most recent, and most common year of birth
     # am gonna use Try statement because washington dont have a birth or gender cols
     print('-'*40)
     #df['Birth Year'] = df['Birth Year'].apply(int)
 
-    print("genders and ages distribution in this city is".title())
+    print("genders and ages distribution in this city is==>".title())
     print('-'*40)
     try:
         for x, y in (df['Gender'].value_counts().to_dict()).items():
@@ -180,7 +188,7 @@ def main():
 
         time_stats(df)
         station_stats(df)
-        # trip_duration_stats(df)
+        trip_duration_stats(df)
         user_stats(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
