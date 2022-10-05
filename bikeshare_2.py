@@ -178,7 +178,7 @@ def user_stats(df):
             f"the most common year of birth is {int(df['Birth Year'].mode()[0])}".title())
         print('-'*40)
     except:
-        print(tc(f"there is no data about gender or birth year in tis city".title(), color='red'))
+        print(tc(f"there is no data about gender or birth year in this city".title(), color='red'))
     print(f"\nThis took {T.time() - start_time} seconds.".title())
     print('-'*40)
 
