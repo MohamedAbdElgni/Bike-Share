@@ -10,7 +10,8 @@ from datetime import datetime
 import matplotlib.ticker as mticker
 from pandas.plotting import register_matplotlib_converters
 from datetime import datetime
-register_matplotlib_converters()  # to generate a list of months
+register_matplotlib_converters()
+# to generate a list of months
 d_month = cal.month_name[1:]+['All']
 d_day = cal.day_name[:]+['All']
 
