@@ -19,7 +19,7 @@ CITY_DATA = {'chicago': 'chicago.csv',
              'newyork': 'new_york_city.csv', 'washington': 'washington.csv'}
 
 
-def get_filters():
+def get_filters() -> str:
     """
     Asks user to specify a city, month, and day to analyze.
 
@@ -63,7 +63,7 @@ def get_filters():
     return city, month, day
 
 
-def load_data(city, month, day):
+def load_data(city, month, day) -> str:
     """
     Loads data for the specified city and filters by month and day if applicable.
 
@@ -92,7 +92,7 @@ def load_data(city, month, day):
     return df
 
 
-def time_stats(df):
+def time_stats(df) -> pd.DataFrame:
     """Displays statistics on the most frequent times of travel."""
 
     print(tc('\nCalculating The Most Frequent Times of Travel...\n', color="cyan"))
@@ -109,7 +109,7 @@ def time_stats(df):
     print('-'*40)
 
 
-def station_stats(df):
+def station_stats(df) -> pd.DataFrame:
     """Displays statistics on the most popular stations and trip."""
 
     print(tc('\nCalculating The Most Popular Stations and Route...\n', color='cyan'))
@@ -128,7 +128,7 @@ def station_stats(df):
     print('-'*40)
 
 
-def trip_duration_stats(df):
+def trip_duration_stats(df) -> pd.DataFrame:
     """Displays statistics on the total and average trip duration."""
 
     print(tc('\nCalculating Trip Duration...\n'.title(), color='cyan'))
@@ -144,7 +144,7 @@ def trip_duration_stats(df):
     print('-'*40)
 
 
-def user_stats(df):
+def user_stats(df) -> pd.DataFrame:
     """Displays statistics on bikeshare users."""
 
     print(tc('\nCalculating User Stats...\n', color='cyan'))
@@ -161,7 +161,7 @@ def user_stats(df):
     print('-'*40)
     #df['Birth Year'] = df['Birth Year'].apply(int)
 
-    print("genders and ages distribution in this city is==>".title())
+    print(tc("genders and ages distribution in this city is==>".title(), color='cyan'))
     print('-'*40)
     try:
         for x, y in (df['Gender'].value_counts().to_dict()).items():
@@ -183,7 +183,7 @@ def user_stats(df):
     print('-'*40)
 
 
-def main():
+def main() -> str:
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
