@@ -30,17 +30,17 @@ def get_filters():
     """
     print(tc('Hello! Let\'s explore some US bike share data!'.title(), color='green'))
     city = input(
-        "Would you like to see data for Chicago, New York, or Washington\n==>".title()).lower().strip()
+        "Would you like to see data for Chicago, New York, or Washington\n==>".title()).lower().strip().replace(" ", "")
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while city not in CITY_DATA.keys():
         print('please enter a valid city name'.title())
         city = input(
-            "Would you like to see data for Chicago, New York, or Washington\n==>".title()).lower().strip()
+            "Would you like to see data for Chicago, New York, or Washington\n==>".title()).lower().strip().replace(" ", "")
 
     # get user input for month (all, january, february, ... , june)
     while True:
         month = input(
-            "Would you like to filter the data by month or day \nif not type all\nif yes please enter a month name (all, january, february, ... , june)\n==>".title()).title().strip()
+            "Would you like to filter the data by month or day \nif not type all\nif yes please enter a month name (all, january, february, ... , june)\n==>".title()).title().strip().replace(" ", "")
         if month not in d_month:
             print("invalid input for months".title())
         else:
@@ -50,7 +50,7 @@ def get_filters():
     # get user input for day of week (all, monday, tuesday, ... sunday)
     while True:
         day = input(
-            "please choose a day (all, monday, tuesday, ... sunday)\n".title()).title().strip()
+            "please choose a day (all, monday, tuesday, ... sunday)\n".title()).title().strip().replace(" ", "")
         if day not in d_day:
             print("invalid input for days".title())
         else:
@@ -123,7 +123,7 @@ def station_stats(df):
         f"the most commonly used end station is {df['End Station'].mode()[0]}".title())
     # display most frequent combination of start station and end station trip
     print(
-        tc(f"the most commonly used route is ({df['start_end'].mode()[0]}) this route repeated {df[df['start_end']==df['start_end'].mode()[0]]['start_end'].count()} times .".title(), color='green'))
+        tc(f"the most commonly used route is ({df['start_end'].mode()[0]}) this route repeated {df[df['start_end']==df['start_end'].mode()[0]]['start_end'].count()} times .".title(), color='yellow'))
     print(f"\nThis took {T.time() - start_time}seconds.".title())
     print('-'*40)
 
