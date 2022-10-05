@@ -27,14 +27,14 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    print('Hello! Let\'s explore some US bikeshare data!'.title())
+    print(tc('Hello! Let\'s explore some US bike share data!'.title(), color='green'))
     city = input(
-        "Would you like to see data for Chicago, New York, or Washington\n==>".title()).lower()
+        "Would you like to see data for Chicago, New York, or Washington\n==>".title()).lower().strip()
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while city not in CITY_DATA.keys():
         print('please enter a valid city name'.title())
         city = input(
-            "Would you like to see data for Chicago, New York, or Washington\n==>".title()).lower()
+            "Would you like to see data for Chicago, New York, or Washington\n==>".title()).lower().strip()
 
     # get user input for month (all, january, february, ... , june)
     while True:
@@ -54,7 +54,7 @@ def get_filters():
             print("invalid input for days".title())
         else:
             res = tc(pfg.figlet_format(
-                "Loading Stats!", font="digital"), color='cyan')
+                "Loading Data!", font="digital"), color='cyan')
             print(res)
             break
 
@@ -94,7 +94,7 @@ def load_data(city, month, day):
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
-    print('\nCalculating The Most Frequent Times of Travel...\n')
+    print(tc('\nCalculating The Most Frequent Times of Travel...\n', color="cyan"))
     start_time = T.time()
 
     # display the most common month
@@ -111,7 +111,7 @@ def time_stats(df):
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
-    print('\nCalculating The Most Popular Stations and Trip...\n')
+    print(tc('\nCalculating The Most Popular Stations and Trip...\n', color='cyan'))
     start_time = T.time()
 
     # display most commonly used start station
@@ -122,7 +122,7 @@ def station_stats(df):
         f"the most commonly used end station is {df['End Station'].mode()[0]}".title())
     # display most frequent combination of start station and end station trip
     print(
-        f"the most commonly used route is ({df['start_end'].mode()[0]}) this route repeated {df[df['start_end']==df['start_end'].mode()[0]]['start_end'].count()} times .".title())
+        tc(f"the most commonly used route is ({df['start_end'].mode()[0]}) this route repeated {df[df['start_end']==df['start_end'].mode()[0]]['start_end'].count()} times .".title(), color='green'))
     print(f"\nThis took {T.time() - start_time}seconds.".title())
     print('-'*40)
 
@@ -130,7 +130,7 @@ def station_stats(df):
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
-    print('\nCalculating Trip Duration...\n'.title())
+    print(tc('\nCalculating Trip Duration...\n'.title(), color='cyan'))
     start_time = T.time()
 
     # display total travel time
@@ -146,7 +146,7 @@ def trip_duration_stats(df):
 def user_stats(df):
     """Displays statistics on bikeshare users."""
 
-    print('\nCalculating User Stats...\n')
+    print(tc('\nCalculating User Stats...\n', color='cyan'))
     start_time = T.time()
 
     # Display counts of user types from User Type  col
@@ -165,7 +165,9 @@ def user_stats(df):
     try:
         for x, y in (df['Gender'].value_counts().to_dict()).items():
             print(f"a {y} of {x}s".title())
-        print("the age range for this city is ==>".title())
+        print('-'*40)
+        print(tc("the age range for this city is ==>".title(), color='cyan'))
+        print('-'*40)
 
         print(
             f"the most earliest year of birth is {int(df['Birth Year'].min())}".title())
@@ -175,8 +177,7 @@ def user_stats(df):
             f"the most common year of birth is {int(df['Birth Year'].mode()[0])}".title())
         print('-'*40)
     except:
-        print(f"there is no data about gender or birth year in tis city".title())
-        print('-'*40)
+        print(tc(f"there is no data about gender or birth year in tis city".title(), color='red'))
     print(f"\nThis took {T.time() - start_time} seconds.".title())
     print('-'*40)
 
@@ -191,7 +192,8 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        restart = input(
+            tc('\nWould you like to restart? Enter yes or no.\n', color='magenta'))
         if restart.lower() != 'yes':
             break
 
