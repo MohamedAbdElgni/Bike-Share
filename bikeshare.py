@@ -187,14 +187,14 @@ def user_stats(df) -> pd.DataFrame:
 i = 0  # this counter for showing user data
 
 
-def ask(df) -> pd.DataFrame:
+def ask_for_rows(df) -> pd.DataFrame:
     '''ths fun return 5 rows for user to se based on his input after asking...'''
     var = ['yes', 'no']
     x = str(
         input("Do you wanna see some rows from this city (yes,no)? ==>".title())).lower()
     if x not in var:
         print(tc("invalid input please enter (yes,no)".title(), color='red'))
-        return ask(df)
+        return ask_for_rows(df)
     else:
         if x in var:
             if x == "yes":
@@ -206,7 +206,7 @@ def ask(df) -> pd.DataFrame:
                     tc(f'here is some rows from row {i} to row {i+4}'.title(), color='cyan'))
                 print(tc(df.iloc[i:i+5], color='green'))
                 i += 5
-                return ask(df)
+                return ask_for_rows(df)
 
 
 def main() -> str:
@@ -218,7 +218,7 @@ def main() -> str:
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        ask(df)
+        ask_for_rows(df)
 
         restart = input(
             tc('\nWould you like to restart? Enter yes or no.\n', color='magenta'))
