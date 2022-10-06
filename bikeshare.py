@@ -184,7 +184,7 @@ def user_stats(df) -> pd.DataFrame:
     print('-'*40)
 
 
-i = 0  # this for showing user data
+i = 0  # this counter for showing user data
 
 
 def ask(df) -> pd.DataFrame:
