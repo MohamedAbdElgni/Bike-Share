@@ -14,7 +14,7 @@ register_matplotlib_converters()
 # to generate a list of months
 d_month = cal.month_name[1:]+['All']
 d_day = cal.day_name[:]+['All']
-valid_entries = ['Yes', 'No']
+rows_input = ['Yes', 'No']
 
 CITY_DATA = {'chicago': 'chicago.csv',
              'newyork': 'new_york_city.csv', 'washington': 'washington.csv'}
@@ -184,29 +184,27 @@ def user_stats(df) -> pd.DataFrame:
     print('-'*40)
 
 
-i = 0
-
-
-def ask(df):
-    var = ['yes', 'no']
-    x = str(input("you wanna see some rows? ==>"))
-    if x not in var:
-        print("invalid input please")
-        return ask(df)
+def display_data(df) -> pd.DataFrame:
+    '''ths fun return 5 rows for user to se based on his input after asking him...'''
+    num = 5
+    df_in = 0
+    view_rows_ask = input(
+        '\nWould you like to view 5 rows of individual trip data? Enter yes or no\n'.title()).title()
+    while view_rows_ask not in rows_input:
+        print(tc('invalid input \nplease enter (yes or no)'.title(), color='yellow'))
+        view_rows_ask = input(
+            '\nWould you like to view 5 rows of individual trip data? Enter yes or no\n'.title()).title()
     else:
-        if x in var:
-            print(f'thank you')
-            if x == "yes":
-                print('you want some data')
-                global i
-                print(df.iloc[i:i+5])
-                i += 5
-                return ask(df)
+        while view_rows_ask == "Yes":
+            print(df.iloc[df_in:num])
+            num += 5
+            df_in += 5
+            view_rows_ask = input(
+                'Would you like to view the next 5 rows of individual trip data? Enter yes or no\n'.title()).title()
+            if view_rows_ask not in rows_input:
 
-
-# def display_data(df) -> pd.DataFrame:
-#     '''ths fun return 5 rows for user to se based on his input after asking...'''
-# print(df.iloc[start_loc:start_loc+5])
+        else:
+            print("thank you")
 
 
 def main() -> str:
@@ -218,7 +216,7 @@ def main() -> str:
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        ask(df)
+        display_data(df)
 
         restart = input(
             tc('\nWould you like to restart? Enter yes or no.\n', color='magenta'))
