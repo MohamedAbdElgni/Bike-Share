@@ -203,7 +203,7 @@ def ask_for_rows(df) -> pd.DataFrame:
                     print(tc('no more rows to show thank you'.title(), color='yellow'))
                     return
                 print(
-                    tc(f'here is some rows from row {i} to row {i+4}'.title(), color='cyan'))
+                    tc(f'{i+4} has presented'.title(), color='cyan'))
                 print(tc(df.iloc[i:i+5], color='green'))
                 i += 5
                 return ask_for_rows(df)
