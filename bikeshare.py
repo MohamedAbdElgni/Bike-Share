@@ -187,7 +187,7 @@ def user_stats(df) -> pd.DataFrame:
 i = 0  # this for showing user data
 
 
-def ask(df):
+def ask(df) -> pd.DataFrame:
     '''ths fun return 5 rows for user to se based on his input after asking...'''
     var = ['yes', 'no']
     x = str(
@@ -207,11 +207,6 @@ def ask(df):
                 print(tc(df.iloc[i:i+5], color='green'))
                 i += 5
                 return ask(df)
-
-
-# def display_data(df) -> pd.DataFrame:
-#     '''ths fun return 5 rows for user to se based on his input after asking...'''
-# print(df.iloc[start_loc:start_loc+5])
 
 
 def main() -> str:
