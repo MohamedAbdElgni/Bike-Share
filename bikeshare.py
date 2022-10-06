@@ -188,7 +188,7 @@ i = 0  # this counter for showing user data
 
 
 def ask_for_rows(df) -> pd.DataFrame:
-    '''ths fun return 5 rows for user to se based on his input after asking...'''
+    '''ths fun return 5 rows for user based on his input after asking...'''
     var = ['yes', 'no']
     x = str(
         input("Do you wanna see some rows from this city (yes,no)? ==>".title())).lower()
