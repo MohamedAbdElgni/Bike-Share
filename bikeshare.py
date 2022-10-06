@@ -184,26 +184,27 @@ def user_stats(df) -> pd.DataFrame:
     print('-'*40)
 
 
-i = 0
+i = 0  # this for showing user data
 
 
 def ask(df):
+    '''ths fun return 5 rows for user to se based on his input after asking...'''
     var = ['yes', 'no']
-    x = str(input("you wanna see some rows? ==>"))
+    x = str(
+        input("Do you wanna see some rows from this city (yes,no)? ==>".title())).lower()
     if x not in var:
-        print("invalid input please")
+        print(tc("invalid input please enter (yes,no)".title(), color='red'))
         return ask(df)
-
     else:
         if x in var:
-            print(f'thank you')
             if x == "yes":
-                print('you want some data')
                 global i
                 if i > df.count()[0]:
-                    print('no more rows to show thank you')
+                    print(tc('no more rows to show thank you'.title(), color='yellow'))
                     return
-                print(df.iloc[i:i+5])
+                print(
+                    tc(f'here is some rows from row {i} to row {i+4}'.title(), color='cyan'))
+                print(tc(df.iloc[i:i+5], color='green'))
                 i += 5
                 return ask(df)
 
@@ -228,6 +229,9 @@ def main() -> str:
             tc('\nWould you like to restart? Enter yes or no.\n', color='magenta'))
         if restart.lower() != 'yes':
             break
+        else:
+            global i
+            i = 0
 
 
 if __name__ == "__main__":
