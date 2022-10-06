@@ -193,12 +193,16 @@ def ask(df):
     if x not in var:
         print("invalid input please")
         return ask(df)
+
     else:
         if x in var:
             print(f'thank you')
             if x == "yes":
                 print('you want some data')
                 global i
+                if i > df.count()[0]:
+                    print('no more rows to show thank you')
+                    return
                 print(df.iloc[i:i+5])
                 i += 5
                 return ask(df)
